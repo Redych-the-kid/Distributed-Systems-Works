@@ -30,7 +30,7 @@ suspend fun crackPart(hash: String, partNumber : Int, partCount: Int) : String {
             return combination
         }
     }
-    return "empty"
+    return ""
 }
 
 fun String.hash(): String {

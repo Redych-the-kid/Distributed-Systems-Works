@@ -30,10 +30,6 @@ class MongoDBUtil {
 
     fun updateDocument(entry: Document){
         val query = Filters.eq("_id", entry.getString("_id"))
-        val record = getById(entry.getString("_id"))
-        if (record?.getString("status") == Status.READY.toString() && record.getString("value") != "empty"){
-            return
-        }
         val updates = Updates.combine(
             Updates.set("value", entry.getString("value")),
             Updates.set("status", Status.READY.toString()) // Assuming Status is an enum

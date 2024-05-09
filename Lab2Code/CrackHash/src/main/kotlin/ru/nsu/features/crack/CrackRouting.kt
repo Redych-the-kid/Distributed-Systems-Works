@@ -24,7 +24,7 @@ fun Application.configureCrackRouting(){
         post("/api/hash/crack"){
             val receive = call.receive(CrackRemoteRequest::class)
             val token = UUID.randomUUID().toString()
-            val countArr = separate(receive.maxLength, 2)
+            val countArr = separate(receive.maxLength, System.getenv("WORKER_COUNT").toInt())
             for(i in 0..<countArr.size){
                 val workerRequest = WorkerRequest(token, i, countArr[i], receive.hash, receive.maxLength)
                 val message = Json.encodeToString(workerRequest)
